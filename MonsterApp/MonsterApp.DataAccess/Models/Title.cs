@@ -10,7 +10,7 @@ namespace MonsterApp.DataAccess.Models
     {
         public int TitleId { get; set; }
 
-        public string Name { get; set; }
+        public string TitleName { get; set; }
 
         public bool Active { get; set; }
     }

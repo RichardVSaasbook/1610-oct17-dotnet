@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace MonsterApp.DataAccess
     /// <summary>
     /// 
     /// </summary>
-    public class AdoData
+    public partial class AdoData
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["MonsterDB"].ConnectionString;
 
@@ -58,15 +59,16 @@ namespace MonsterApp.DataAccess
                     genders.Add(new Gender
                     {
                         GenderId = int.Parse(row[0].ToString()),
-                        Name = row[1].ToString(),
+                        GenderName = row[1].ToString(),
                         Active = bool.Parse(row[2].ToString())
                     });
                 }
 
                 return genders;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 return null;
             }
         }
