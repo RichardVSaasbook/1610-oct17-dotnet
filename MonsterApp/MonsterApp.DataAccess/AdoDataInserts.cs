@@ -8,44 +8,45 @@ using System.Threading.Tasks;
 
 namespace MonsterApp.DataAccess
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class AdoData // Partial splits class into two; compiler treats them as the same single class.
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gender"></param>
+        /// <returns></returns>
         public bool InsertGender(Gender gender)
         {
-            return Insert(
+            return ManipulateDataDisconnected(
                 "INSERT INTO Monster.Gender(GenderName, Active) VALUES (@name, 1);",
                 new SqlParameter("name", gender.GenderName)) == 1;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
         public bool InsertTitle(Title title)
         {
-            return Insert(
+            return ManipulateDataDisconnected(
                 "INSERT INTO Monster.Title(TitleName, Active) VALUES (@name, 1);",
                 new SqlParameter("name", title.TitleName)) == 1;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="monsterType"></param>
+        /// <returns></returns>
         public bool InsertMonsterType(MonsterType monsterType)
         {
-            return Insert(
+            return ManipulateDataDisconnected(
                 "INSERT INTO Monster.MonsterType(TypeName, Active) VALUES(@name, 1);",
                 new SqlParameter("name", monsterType.TypeName)) == 1;
-        }
-
-        private int Insert(string query, params SqlParameter[] parameters)
-        {
-            int rowsAffected;
-
-            using (var connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(query, connection);
-                cmd.Parameters.AddRange(parameters);
-
-                connection.Open();
-
-                rowsAffected = cmd.ExecuteNonQuery();
-            }
-
-            return rowsAffected;
         }
     }
 }

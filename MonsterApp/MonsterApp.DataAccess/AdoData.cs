@@ -106,5 +106,28 @@ namespace MonsterApp.DataAccess
 
             return ds;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        private int ManipulateDataDisconnected(string query, params SqlParameter[] parameters)
+        {
+            int rowsAffected;
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddRange(parameters);
+
+                connection.Open();
+
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+
+            return rowsAffected;
+        }
     }
 }
