@@ -23,6 +23,16 @@ namespace MonsterApp.Tests
             Assert.NotNull(actual);
         }
 
+        [Fact]
+        public void Test_GetLatestGender()
+        {
+            var data = new AdoData();
+
+            var actual = data.GetLastestGender();
+
+            Assert.NotNull(actual);
+        }
+
         // WRITE TESTS FOR TYPE AND TITLE
         // WRITE NEGATIVE TESTS
     }

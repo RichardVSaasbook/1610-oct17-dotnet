@@ -18,7 +18,7 @@ namespace MonsterApp.DataAccess
         /// </summary>
         /// <param name="gender"></param>
         /// <returns></returns>
-        public bool InsertGender(Gender gender)
+        public bool InsertGender(Models.Gender gender)
         {
             return ManipulateDataDisconnected(
                 "INSERT INTO Monster.Gender(GenderName, Active) VALUES (@name, 1);",
@@ -30,7 +30,7 @@ namespace MonsterApp.DataAccess
         /// </summary>
         /// <param name="title"></param>
         /// <returns></returns>
-        public bool InsertTitle(Title title)
+        public bool InsertTitle(Models.Title title)
         {
             return ManipulateDataDisconnected(
                 "INSERT INTO Monster.Title(TitleName, Active) VALUES (@name, 1);",
@@ -42,7 +42,7 @@ namespace MonsterApp.DataAccess
         /// </summary>
         /// <param name="monsterType"></param>
         /// <returns></returns>
-        public bool InsertMonsterType(MonsterType monsterType)
+        public bool InsertMonsterType(Models.MonsterType monsterType)
         {
             return ManipulateDataDisconnected(
                 "INSERT INTO Monster.MonsterType(TypeName, Active) VALUES(@name, 1);",

@@ -1,5 +1,5 @@
 ﻿using MonsterApp.DataAccess;
-using MonsterApp.DataAccess.Models;
+using Models = MonsterApp.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +12,17 @@ namespace MonsterApp.Tests
     public partial class AdoDataTests
     {
         private AdoData data;
-        private Gender gender;
-        private Title title;
-        private MonsterType monsterType;
+        private Models.Gender gender;
+        private Models.Title title;
+        private Models.MonsterType monsterType;
 
         public AdoDataTests()
         {
             data = new AdoData();
 
-            gender = new Gender { GenderName = "TestGender" };
-            title = new Title { TitleName = "TestTitle" };
-            monsterType = new MonsterType { TypeName = "TestType" };
+            gender = new Models.Gender { GenderName = "TestGender" };
+            title = new Models.Title { TitleName = "TestTitle" };
+            monsterType = new Models.MonsterType { TypeName = "TestType" };
         }
 
         [Fact]

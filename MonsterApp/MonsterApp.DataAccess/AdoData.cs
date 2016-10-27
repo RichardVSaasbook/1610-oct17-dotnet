@@ -47,16 +47,16 @@ namespace MonsterApp.DataAccess
         #region Methods
         
         /// <returns>A List of all Genders.</returns>
-        public List<Gender> GetGenders()
+        public List<Models.Gender> GetGenders()
         {
             try
             {
-                List<Gender> genders = new List<Gender>();
+                List<Models.Gender> genders = new List<Models.Gender>();
                 var ds = GetDataDisconnected("SELECT * FROM Monster.Gender;");
 
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    genders.Add(new Gender
+                    genders.Add(new Models.Gender
                     {
                         GenderId = int.Parse(row[0].ToString()),
                         GenderName = row[1].ToString(),
@@ -72,7 +72,30 @@ namespace MonsterApp.DataAccess
                 return null;
             }
         }
-        
+
+        public Models.Gender GetLastestGender()
+        {
+            try
+            {
+                List<Models.Gender> genders = new List<Models.Gender>();
+                var ds = GetDataDisconnected("SELECT TOP 1 * FROM Monster.Gender ORDER BY GenderId DESC");
+
+                DataRow row = ds.Tables[0].Rows[0];
+
+                return new Models.Gender
+                {
+                    GenderId = int.Parse(row[0].ToString()),
+                    GenderName = row[1].ToString(),
+                    Active = bool.Parse(row[2].ToString())
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+            }
+        }
+
         /// <returns>A List of all MonsterTypes.</returns>
         public List<MonsterType> GetMonsterTypes()
         {
