@@ -1,22 +1,24 @@
-﻿using MonsterApp.DataAccess;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MonsterApp.DataAccess;
 using Models = MonsterApp.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace MonsterApp.Tests
 {
-    public partial class AdoDataTests
+    [TestClass]
+    public class AdoDataMSTests
     {
         private AdoData data;
         private Models.Gender gender;
         private Models.Title title;
         private Models.MonsterType monsterType;
 
-        public AdoDataTests()
+        [TestInitialize]
+        public void Initialize()
         {
             data = new AdoData();
 
@@ -25,37 +27,34 @@ namespace MonsterApp.Tests
             monsterType = new Models.MonsterType { TypeName = "TestType" };
         }
 
-        [Fact]
+        [TestCleanup]
+        public void Cleanup()
+        {
+            GC.Collect();
+        }
+
+        [TestMethod]
         public void Test_InsertGender()
         {
             var actual = data.InsertGender(gender);
 
-            Assert.True(actual);
+            Assert.IsTrue(actual);
         }
 
-        [Fact]
+        [TestMethod]
         public void Test_InsertTitle()
         {
             var actual = data.InsertTitle(title);
 
-            Assert.True(actual);
+            Assert.IsTrue(actual);
         }
 
-        [Fact]
+        [TestMethod]
         public void Test_InsertMonsterType()
         {
             var actual = data.InsertMonsterType(monsterType);
 
-            Assert.True(actual);
-        }
-
-        //[Theory]
-        //[InlineData(new Models.Gender { GenderName = "blah", Active = true })]
-        public void Theory_InsertGender(Models.Gender gender)
-        {
-            var actual = data.InsertGender(gender);
-
-            Assert.True(actual);
+            Assert.IsTrue(actual);
         }
     }
 }

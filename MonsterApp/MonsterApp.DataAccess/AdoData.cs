@@ -97,9 +97,30 @@ namespace MonsterApp.DataAccess
         }
 
         /// <returns>A List of all MonsterTypes.</returns>
-        public List<MonsterType> GetMonsterTypes()
+        public List<Models.MonsterType> GetMonsterTypes()
         {
-            throw new NotImplementedException("Todo.");
+            try
+            {
+                List<Models.MonsterType> monsterTypes = new List<Models.MonsterType>();
+                var ds = GetDataDisconnected("SELECT * FROM Monster.MonsterType;");
+
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    monsterTypes.Add(new Models.MonsterType
+                    {
+                        MonsterTypeId = int.Parse(row[0].ToString()),
+                        TypeName = row[1].ToString(),
+                        Active = bool.Parse(row[2].ToString())
+                    });
+                }
+
+                return monsterTypes;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+            }
         }
         
         /// <returns>A List of all Titles.</returns>

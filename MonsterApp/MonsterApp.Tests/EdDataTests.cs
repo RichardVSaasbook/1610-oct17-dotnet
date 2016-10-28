@@ -66,5 +66,59 @@ namespace MonsterApp.Tests
 
             Assert.True(actual);
         }
+
+        [Fact]
+        public void Test_InsertMonster()
+        {
+            var data = new EfData();
+            var monster = new Monster {
+                Name = "Dracula",
+                MonsterType = new MonsterType
+                {
+                    TypeName = "Vampire",
+                    Active = true
+                },
+                Gender = data.GetLatestGender(),
+                Title = new Title
+                {
+                    TitleName = "Count",
+                    Active = true
+                },
+                Active = true
+            };
+            var expected = 3;
+
+            var actual = data.InsertMonster(monster);
+
+            Assert.Equal(actual, expected);
+        }
+
+        [Fact]
+        public void Test_InsertMonster2()
+        {
+            var data = new EfData();
+            var monsterType = data.GetFirstMonsterType();
+            var monster = new Monster
+            {
+                MonsterType = monsterType,
+                Name = "Test Mosnter",
+                Active = true
+            };
+            var expected = 1;
+
+            var actual = data.InsertMonster(monster);
+
+            Assert.Equal(actual, expected);
+        }
+
+        [Fact]
+        public void Test_GetMonsters()
+        {
+            var data = new EfData();
+
+            var actual = data.GetMonsters();
+
+            Assert.NotNull(actual);
+        }
     }
 }
