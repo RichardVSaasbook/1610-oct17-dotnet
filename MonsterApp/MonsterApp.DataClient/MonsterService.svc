@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="MonsterApp.DataClient.MonsterService" CodeBehind="MonsterService.svc.cs" %>
