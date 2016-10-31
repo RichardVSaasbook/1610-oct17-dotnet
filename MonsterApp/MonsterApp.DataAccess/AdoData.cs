@@ -124,9 +124,30 @@ namespace MonsterApp.DataAccess
         }
         
         /// <returns>A List of all Titles.</returns>
-        public List<Title> GetTitles()
+        public List<Models.Title> GetTitles()
         {
-            throw new NotImplementedException("Todo.");
+            try
+            {
+                List<Models.Title> titles = new List<Models.Title>();
+                var ds = GetDataDisconnected("SELECT * FROM Monster.Title;");
+
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    titles.Add(new Models.Title
+                    {
+                        TitleId = int.Parse(row[0].ToString()),
+                        TitleName = row[1].ToString(),
+                        Active = bool.Parse(row[2].ToString())
+                    });
+                }
+
+                return titles;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return null;
+            }
         }
 
         #endregion
